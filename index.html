@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>XYZ CLOSET</title>
+
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        /* ---------------- BASE ---------------- */
+        :root {
+            --burgundy: #570217;
+            --burgundy-2: #a21c40;
+            --muted: #f5f5f5;
+            --text: #1a1a1a;
+            --max-accordion-height: 600px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Montserrat", system-ui, sans-serif;
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        /* ---------------- NOTICE BAR ---------------- */
+        .notice-bar {
+            background: var(--burgundy);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            gap: 12px;
+        }
+
+        .notice-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .arrow-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 20px;
+            padding: 6px;
+        }
+
+        .notice-text {
+            position: relative;
+            min-width: 220px;
+            max-width: 640px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-weight: 500;
+        }
+
+        .notice-item {
+            position: absolute;
+            left: 0;
+            right: 0;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .35s ease, transform .35s ease;
+            text-align: center;
+            font-size: 15px;
+        }
+
+        .notice-item.show {
+            opacity: 1;
+            transform: translateY(0);
+            position: relative;
+        }
+
+        .notice-currency {
+            position: relative;
+            margin-left: 12px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 500;
+        }
+
+        .notice-currency .list {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: calc(100% + 8px);
+            background: var(--burgundy);
+            color: #fff;
+            border-radius: 6px;
+            min-width: 180px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, .15);
+            z-index: 1200;
+        }
+
+        .notice-currency .list button {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px 12px;
+            border: none;
+            background: transparent;
+            color: #fff;
+        }
+
+        .notice-currency .list button:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .notice-currency:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            transition: background 0.22s ease;
+        }
+
+        /* ---------------- NAVBAR ---------------- */
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #e6e6e6;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 20px;
+            gap: 20px;
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 20px;
+            letter-spacing: .2px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 18px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-weight: 500;
+            color: var(--text);
+            position: relative;
+            transition: color 0.22s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--burgundy);
+            left: 0;
+            bottom: -4px;
+            transition: width 0.22s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--burgundy);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 6px);
+            left: 0;
+            background: #fff;
+            border: 1px solid #eee;
+            min-width: 170px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-6px);
+            transition: opacity .22s ease, transform .22s ease;
+            border-radius: 6px;
+            z-index: 1000;
+            padding: 6px 0;
+            list-style: none;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 8px 12px;
+            color: var(--text);
+            font-size: 14px;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--burgundy);
+            color: #fff;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .icon-btn img {
+            display: block;
+        }
+
+        .desktop-currency select {
+            padding: 6px;
+            border-radius: 4px;
+        }
+
+        /* ---------------- HERO ---------------- */
+        .hero {
+            min-height: 100vh;
+            width: 100%;
+            background: url('HERO IMAGE.jpg') center center / cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            color: #111;
+            line-height: 4.5;
+        }
+
+        .hero .btn {
+            background: maroon;
+            color: #fff;
+            padding: 12px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
+        }
+
+        .hero .btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 8px 16px 8px rgba(0, 0, 0, 0.15);
+            background: #8b0000;
+        }
+        .hamburger {
+            display: none;
+        }
+        .mobile-menu {
+            display: none;
+            visibility: hidden;
+            opacity: 0;
+        }
+
+        /* ---------------- MOBILE ---------------- */
+        @media (max-width: 768px) {
+            .nav-links,
+            .desktop-currency {
+                display: none;
+            }
+
+            .hamburger {
+                display: inline-flex;
+                font-size: 26px;
+                cursor: pointer;
+            }
+
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #fff;
+                z-index: 1500;
+                padding: 20px;
+                overflow-y: auto;
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity .22s ease;
+                display: none !important;
+                
+            }
+
+            .mobile-menu.open {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .close-mobile-btn {
+                font-size: 32px;
+                color: #111;
+                display: block;
+                text-align: right;
+                margin-bottom: 20px;
+            }
+
+            .mobile-links {
+                list-style: none;
+            }
+
+            .mobile-links li {
+                padding: 12px 0;
+                border-bottom: 1px solid #f0f0f0;
+            }
+
+            .mobile-links a,
+            .mobile-links button.accordion {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 16px;
+                padding: 6px 0;
+                color: var(--text);
+                font-weight: 500;
+                cursor: pointer;
+            }
+
+            .submenu {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height .32s ease, padding .32s ease;
+                padding-left: 12px;
+            }
+
+            .submenu.open {
+                max-height: var(--max-accordion-height);
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+            .submenu li {
+                padding: 8px 0;
+            }
+
+            .menu-divider {
+                margin: 16px 0;
+                border-top: 1px solid #eee;
+            }
+
+            .mobile-currency select {
+                width: 100%;
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .social-row {
+                display: flex;
+                gap: 14px;
+                font-size: 20px;
+            }
+
+            .mobile-arrow {
+                transition: transform .25s ease;
+            }
+
+            .mobile-arrow.rotate {
+                transform: rotate(90deg);
+            }
+
+            /* Hero adjustments for mobile */
+            .hero {
+                min-height: 60vh;
+                background-size: cover;
+                background-position: center;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+                line-height: 1.2;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .hero .btn {
+                font-size: 14px;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NOTICE BAR -->
+    <div class="notice-bar">
+        <div class="notice-wrapper">
+            <button class="arrow-btn" id="noticePrev">&#10094;</button>
+            <div class="notice-text">
+                <div class="notice-item show">Payments accepted in Naira</div>
+                <div class="notice-item">Sizing available: X – XXL</div>
+                <div class="notice-item">No refunds on merchandise</div>
+                <div class="notice-item">Visit XYZ.com for more</div>
+            </div>
+            <button class="arrow-btn" id="noticeNext">&#10095;</button>
+        </div>
+
+        <div class="notice-currency" id="noticeCurrency">
+            <span class="currency-label">Nigeria | ₦ NGN</span>
+            <span style="font-size:12px;">&#9662;</span>
+            <div class="list" id="noticeCurrencyList">
+                <button data-value="NGN">Nigeria | ₦ NGN</button>
+                <button data-value="USD">United States | $ USD</button>
+                <button data-value="GBP">United Kingdom | £ GBP</button>
+                <button data-value="EUR">Eurozone | € EUR</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- NAVBAR -->
+    <header class="navbar">
+        <div class="nav-inner">
+            <div class="brand">My Brand Logo</div>
+            <ul class="nav-links">
+                <li class="dropdown">
+                    <a href="#">HOME ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Sub Home 1</a></li>
+                        <li><a href="#">Sub Home 2</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">SHOP ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="shop.html">MEN</a></li>
+                        <li><a href="shop.html">WOMEN</a></li>
+                        <li><a href="shop.html">ACCESSORIES</a></li>
+                        <li><a href="shop.html">BAGS</a></li>
+                        <li><a href="shop.html">SHOES</a></li>
+                    </ul>
+                </li>
+                <li><a href="about.html">ABOUT</a></li>
+                <li><a href="contact.html">CONTACT</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="desktop-currency">
+                    <select>
+                        <option selected>₦ Nigeria - NGN</option>
+                        <option>$ United States - USD</option>
+                        <option>£ United Kingdom - GBP</option>
+                        <option>€ Eurozone - EUR</option>
+                    </select>
+                </div>
+                <a href="search.html" class="icon-btn"><img src="Search icon.png" width="18"></a>
+                <a href="cart.html" class="icon-btn"><img src="shopping bag.svg" width="22"></a>
+                <button class="hamburger icon-btn" id="hamburgerBtn">&#9776;</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button id="closeMobileMenu" class="close-mobile-btn">&times;</button>
+        <ul class="mobile-links">
+            <li>
+                <button class="accordion">Home <span class="mobile-arrow">&#9654;</span></button>
+                <ul class="submenu">
+                    <li><a href="#">Sub Home 1</a></li>
+                    <li><a href="#">Sub Home 2</a></li>
+                </ul>
+            </li>
+            <li>
+                <button class="accordion">Shop <span class="mobile-arrow">&#9654;</span></button>
+                <ul class="submenu">
+                    <li><a href="#">Men</a></li>
+                    <li><a href="#">Women</a></li>
+                    <li><a href="#">Accessories</a></li>
+                    <li><a href="#">Bags</a></li>
+                    <li><a href="#">Shoes</a></li>
+                </ul>
+            </li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+
+        <div class="menu-divider"></div>
+
+        <div class="mobile-currency">
+            <select>
+                <option selected>₦ Nigeria - NGN</option>
+                <option>$ United States - USD</option>
+                <option>£ United Kingdom - GBP</option>
+                <option>€ Eurozone - EUR</option>
+            </select>
+        </div>
+
+        <div class="social-row">
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-tiktok"></i></a>
+            <a href="#"><i class="fab fa-snapchat"></i></a>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>NEW COLLECTIONS AVAILABLE</h1>
+            <a class="btn" href="#">SHOP HERE</a>
+        </div>
+    </section>
+
+    <script>
+        // ---------------- NOTICE BAR ----------------
+        const noticeItems = document.querySelectorAll('.notice-item');
+        let currentNotice = 0;
+        function showNotice(index) {
+            noticeItems.forEach((item, i) => item.classList.toggle('show', i === index));
+        }
+        document.getElementById('noticeNext').addEventListener('click', () => {
+            currentNotice = (currentNotice + 1) % noticeItems.length;
+            showNotice(currentNotice);
+        });
+        document.getElementById('noticePrev').addEventListener('click', () => {
+            currentNotice = (currentNotice - 1 + noticeItems.length) % noticeItems.length;
+            showNotice(currentNotice);
+        });
+        setInterval(() => {
+            currentNotice = (currentNotice + 1) % noticeItems.length;
+            showNotice(currentNotice);
+        }, 4000);
+
+        // ---------------- CURRENCY ----------------
+        const noticeCurrency = document.getElementById('noticeCurrency');
+        const currencyList = document.getElementById('noticeCurrencyList');
+        noticeCurrency.addEventListener('click', e => {
+            e.stopPropagation();
+            currencyList.style.display = currencyList.style.display === 'block' ? 'none' : 'block';
+        });
+        document.addEventListener('click', () => { currencyList.style.display = 'none'; });
+
+        // ---------------- MOBILE MENU ----------------
+        const hamburger = document.getElementById('hamburgerBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeBtn = document.getElementById('closeMobileMenu');
+
+        hamburger.addEventListener('click', () => {
+            mobileMenu.classList.add('open');
+        });
+        closeBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+        });
+
+        // ---------------- MOBILE ACCORDION ----------------
+        document.querySelectorAll('.accordion').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const submenu = btn.nextElementSibling;
+                const arrow = btn.querySelector('.mobile-arrow');
+                submenu.classList.toggle('open');
+                arrow.classList.toggle('rotate');
+            });
+        });
+    </script>
+
+</body>
+
+</html>
