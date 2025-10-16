@@ -303,11 +303,27 @@
             .desktop-currency {
                 display: none;
             }
+            .notice-currency {
+                display: none;
+            }
+            .nav-inner {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start; /* align all items to the left */
+                gap:12px;
+            }
 
             .hamburger {
-                display: inline-flex;
+                order: -1;
                 font-size: 26px;
                 cursor: pointer;
+            }
+            .brand {
+                flex-grow: 1;
+                text-align: center;
+            }
+            .nav-right {
+                display: none;
             }
 
             .mobile-menu {
@@ -323,7 +339,6 @@
                 opacity: 0;
                 visibility: hidden;
                 transition: opacity .22s ease;
-                display: none !important;
                 
             }
 
@@ -490,7 +505,7 @@
                     </select>
                 </div>
                 <a href="search.html" class="icon-btn"><img src="Search icon.png" width="18"></a>
-                <a href="cart.html" class="icon-btn"><img src="shopping bag.svg" width="22"></a>
+                <a href="cart.html" class="icon-btn"><img src="shopping bag.png" width="22"></a>
                 <button class="hamburger icon-btn" id="hamburgerBtn">&#9776;</button>
             </div>
         </div>
@@ -591,12 +606,25 @@
 
         // ---------------- MOBILE ACCORDION ----------------
         document.querySelectorAll('.accordion').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const submenu = btn.nextElementSibling;
-                const arrow = btn.querySelector('.mobile-arrow');
-                submenu.classList.toggle('open');
-                arrow.classList.toggle('rotate');
-            });
+    btn.addEventListener('click', () => {
+        const submenu = btn.nextElementSibling; // the submenu for this button
+        const arrow = btn.querySelector('.mobile-arrow'); // the arrow for this button
+
+        // Close all other submenus
+        document.querySelectorAll('.submenu').forEach(s => {
+            if (s !== submenu) s.classList.remove('open');
+        });
+
+        // Reset all other arrows
+        document.querySelectorAll('.mobile-arrow').forEach(a => {
+            if (a !== arrow) a.classList.remove('rotate');
+        });
+
+        // Toggle this submenu
+        submenu.classList.toggle('open');
+        arrow.classList.toggle('rotate');
+    });
+
         });
     </script>
 
