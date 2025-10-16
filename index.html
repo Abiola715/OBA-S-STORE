@@ -205,6 +205,10 @@
         .nav-links a:hover::after {
             width: 100%;
         }
+        .nav-right {
+            display: flex;
+            gap:12px;
+        }
 
         .dropdown {
             position: relative;
@@ -331,6 +335,10 @@
                 text-align: center;
             }
             .nav-right {
+                display: flex;
+                gap: 12px;
+            }
+            .desktop-currency {
                 display: none;
             }
 
@@ -483,6 +491,7 @@
     <!-- NAVBAR -->
     <header class="navbar">
         <div class="nav-inner">
+            <button class="hamburger icon-btn" id="hamburgerBtn">&#9776;</button>
             <div class="brand">
                 <a href="index.html">
                     <img src="OBA logo (white background).png" alt="My Brand Logo" >
@@ -522,7 +531,6 @@
                 <a href="search.html" class="icon-btn"><img src="Search icon.png" width="18"></a>
                 <a href="cart.html" class="icon-btn"><img src="shopping bag.png" width="22"></a>
                 </div>
-                <button class="hamburger icon-btn" id="hamburgerBtn">&#9776;</button>
     </header>
 
     <!-- MOBILE MENU -->
