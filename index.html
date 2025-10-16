@@ -165,6 +165,11 @@
             font-size: 20px;
             letter-spacing: .2px;
         }
+        .brand img {
+            height: 100px;
+            width: auto;
+            object-fit: contain;
+        }
 
         .nav-links {
             display: flex;
@@ -314,9 +319,12 @@
             }
 
             .hamburger {
-                order: -1;
+                display: block;
                 font-size: 26px;
                 cursor: pointer;
+                background: none;
+                border: none;
+                color: var(--text);
             }
             .brand {
                 flex-grow: 1;
@@ -425,6 +433,9 @@
                 background-size: cover;
                 background-position: center;
             }
+            .hero-content h1 {
+                margin-bottom: 20px;
+            }
 
             .hero h1 {
                 font-size: 1.5rem;
@@ -472,7 +483,11 @@
     <!-- NAVBAR -->
     <header class="navbar">
         <div class="nav-inner">
-            <div class="brand">My Brand Logo</div>
+            <div class="brand">
+                <a href="index.html">
+                    <img src="OBA logo (white background).png" alt="My Brand Logo" >
+                </a>
+            </div>
             <ul class="nav-links">
                 <li class="dropdown">
                     <a href="#">HOME ▾</a>
@@ -506,9 +521,8 @@
                 </div>
                 <a href="search.html" class="icon-btn"><img src="Search icon.png" width="18"></a>
                 <a href="cart.html" class="icon-btn"><img src="shopping bag.png" width="22"></a>
+                </div>
                 <button class="hamburger icon-btn" id="hamburgerBtn">&#9776;</button>
-            </div>
-        </div>
     </header>
 
     <!-- MOBILE MENU -->
