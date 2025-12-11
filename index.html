@@ -44,8 +44,8 @@
 
         /* ---------------- NOTICE BAR ---------------- */
         .notice-bar {
-            background: var(--burgundy);
-            color: #fff;
+            background: #012101;
+            color: #000000;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -64,7 +64,7 @@
         .arrow-btn {
             background: transparent;
             border: none;
-            color: white;
+            color: rgb(0, 0, 0);
             font-size: 20px;
             padding: 6px;
         }
@@ -113,7 +113,7 @@
             position: absolute;
             right: 0;
             top: calc(100% + 8px);
-            background: var(--burgundy);
+            background:#000000;
             color: #fff;
             border-radius: 6px;
             min-width: 180px;
@@ -143,7 +143,7 @@
 
         /* ---------------- NAVBAR ---------------- */
         .navbar {
-            background: #fff;
+            background: #000000;
             border-bottom: 1px solid #e6e6e6;
             position: sticky;
             top: 0;
@@ -182,7 +182,7 @@
             padding: 8px 12px;
             border-radius: 6px;
             font-weight: 500;
-            color: var(--text);
+            color: #cb9c01d7;
             position: relative;
             transition: color 0.22s ease;
         }
@@ -192,14 +192,14 @@
             position: absolute;
             width: 0;
             height: 2px;
-            background: var(--burgundy);
+            background: #cb9c01d7;
             left: 0;
             bottom: -4px;
             transition: width 0.22s ease;
         }
 
         .nav-links a:hover {
-            color: var(--burgundy);
+            color: #cb9c01d7;
         }
 
         .nav-links a:hover::after {
@@ -245,7 +245,7 @@
         }
 
         .dropdown-menu a:hover {
-            background: var(--burgundy);
+            background: #000000;
             color: #fff;
         }
 
@@ -268,7 +268,7 @@
         .hero {
             min-height: 100vh;
             width: 100%;
-            background: url('HERO IMAGE.jpg') center center / cover no-repeat;
+            background: url('THE MOBILE STYLIST.JPG') center center / cover no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -276,14 +276,9 @@
             padding: 40px 20px;
         }
 
-        .hero h1 {
-            font-size: 2.8rem;
-            color: #111;
-            line-height: 4.5;
-        }
 
         .hero .btn {
-            background: maroon;
+            background: rgb(0, 0, 0);
             color: #fff;
             padding: 12px 22px;
             border-radius: 6px;
@@ -295,7 +290,7 @@
         .hero .btn:hover {
             transform: scale(1.08);
             box-shadow: 0 8px 16px 8px rgba(0, 0, 0, 0.15);
-            background: #8b0000;
+            background: #002401;
         }
         .hamburger {
             display: none;
@@ -470,9 +465,9 @@
             <button class="arrow-btn" id="noticePrev">&#10094;</button>
             <div class="notice-text">
                 <div class="notice-item show">Payments accepted in Naira</div>
-                <div class="notice-item">Sizing available: X – XXL</div>
-                <div class="notice-item">No refunds on merchandise</div>
-                <div class="notice-item">Visit XYZ.com for more</div>
+                <div class="notice-item">Wigs: Prices are subject to change</div>
+                <div class="notice-item">Cluster Lashes, Brow lamination and tinting</div>
+                <div class="notice-item">Visit Mobilestylist.com for more</div>
             </div>
             <button class="arrow-btn" id="noticeNext">&#10095;</button>
         </div>
@@ -495,25 +490,26 @@
             <button class="hamburger icon-btn" id="hamburgerBtn">&#9776;</button>
             <div class="brand">
                 <a href="index.html">
-                    <img src="OBA logo (white background).png" alt="My Brand Logo" >
+                    <img src="THE MOBILE STYLIST.jpg" alt="My Brand Logo" >
                 </a>
             </div>
             <ul class="nav-links">
                 <li class="dropdown">
-                    <a href="#">HOME ▾</a>
+                    <a href="#">WIGS ▾</a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Sub Home 1</a></li>
-                        <li><a href="#">Sub Home 2</a></li>
+                        <li><a href="#">WIGGING</a></li>
+                        <li><a href="#">REVAMPING</a></li>
+                        <li><a href="#">STYLING</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#">SHOP ▾</a>
+                    <a href="#">BROW AND LASH ENHANCEMENT▾</a>
                     <ul class="dropdown-menu">
-                        <li><a href="shop.html">MEN</a></li>
-                        <li><a href="shop.html">WOMEN</a></li>
-                        <li><a href="shop.html">ACCESSORIES</a></li>
-                        <li><a href="shop.html">BAGS</a></li>
-                        <li><a href="shop.html">SHOES</a></li>
+                        <li><a href="#">CLUSTER LASHES INSTALLATION</a></li>
+                        <li><a href="#">CLUSTER REMOVAL</a></li>
+                        <li><a href="#">BROW LAMINATION</a></li>
+                        <li><a href="#">BROW TINTING</a></li>
+                        <li><a href="#">SALES OF CLUSTER LASHES/BROW LAMINATION KIT</a></li>
                     </ul>
                 </li>
                 <li><a href="about.html">ABOUT</a></li>
@@ -581,7 +577,7 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-content">
-            <h1>NEW COLLECTIONS AVAILABLE</h1>
+        
             <a class="btn" href="#">SHOP HERE</a>
         </div>
     </section>
